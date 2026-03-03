@@ -661,6 +661,19 @@
     reselect "^5.1.1"
     use-sync-external-store "^1.6.0"
 
+"@mui/x-data-grid@^8.27.3":
+  version "8.27.3"
+  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-8.27.3.tgz#1a82e06df8327d09c8585692441f7200dc720b00"
+  integrity sha512-4JhwMBLGpaSyg8tqnYkegk4gfXovqxT+gRlm2Lb8f3WDFUPsVGL5c/bMi7MSRkYJ2h1pGXaLKaYORLR62xuRAQ==
+  dependencies:
+    "@babel/runtime" "^7.28.4"
+    "@mui/utils" "^7.3.5"
+    "@mui/x-internals" "8.26.0"
+    "@mui/x-virtualizer" "0.3.3"
+    clsx "^2.1.1"
+    prop-types "^15.8.1"
+    use-sync-external-store "^1.6.0"
+
 "@mui/x-internal-gestures@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@mui/x-internal-gestures/-/x-internal-gestures-0.4.0.tgz#68d0d23ab794de186e02e6f29116d1fe1d9211c8"
@@ -677,6 +690,15 @@
     "@mui/utils" "^7.3.5"
     reselect "^5.1.1"
     use-sync-external-store "^1.6.0"
+
+"@mui/x-virtualizer@0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@mui/x-virtualizer/-/x-virtualizer-0.3.3.tgz#f788e791564d7fea4706556a614cc23b623bdbe7"
+  integrity sha512-6ugUh7UAhQYdgPgHLu181zqufh3Y8IqEU9Pe6Huzj0xkRi3NwMx/ZzvrHf2WazNOh2uLhQ5ZM2wFqDu3mxBWZA==
+  dependencies:
+    "@babel/runtime" "^7.28.4"
+    "@mui/utils" "^7.3.5"
+    "@mui/x-internals" "8.26.0"
 
 "@pkgr/core@^0.2.9":
   version "0.2.9"
