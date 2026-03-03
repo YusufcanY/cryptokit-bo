@@ -6,6 +6,8 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import LogoutIcon from '@mui/icons-material/Logout'
+import PersonIcon from '@mui/icons-material/Person'
 import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
@@ -82,8 +84,7 @@ export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               <Avatar
-                alt="User Placeholder"
-                src="/static/images/avatar/2.jpg"
+                alt="User"
               />
             </IconButton>
           </Tooltip>
@@ -104,9 +105,11 @@ export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
             onClose={handleCloseUserMenu}
           >
             <MenuItem onClick={handleCloseUserMenu}>
+              <PersonIcon sx={{ mr: 1, color: 'text.primary' }} />
               <Typography textAlign="center">Profile</Typography>
             </MenuItem>
-            <MenuItem onClick={handleCloseUserMenu}>
+            <MenuItem onClick={handleCloseUserMenu} sx={{ color: 'error.main' }}>
+              <LogoutIcon sx={{ mr: 1 }} />
               <Typography textAlign="center">Logout</Typography>
             </MenuItem>
           </Menu>
