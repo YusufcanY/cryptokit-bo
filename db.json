@@ -1,0 +1,12 @@
+{
+  "portfolio": [
+    { "id": "bitcoin", "symbol": "btc", "balance": 15.42 },
+    { "id": "ethereum", "symbol": "eth", "balance": 240.50 },
+    { "id": "tether", "symbol": "usdt", "balance": 450000.00 }
+  ],
+  "transactions": [
+    { "id": "TX-9901", "player": "User 88", "asset": "bitcoin", "amount": 0.45, "type": "Deposit" },
+    { "id": "TX-9902", "player": "Vip_Ace", "asset": "ethereum", "amount": 8.2, "type": "Withdrawal" },
+    { "id": "TX-9903", "player": "User 42", "asset": "tether", "amount": 12000, "type": "Deposit" }
+  ]
+}
