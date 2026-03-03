@@ -1,9 +1,9 @@
-import coingeckoApi from '@/lib/coingecko';
+import coingeckoApi from '@/lib/coingecko'
 
 export interface CryptoPrices {
-  bitcoin: { usd: number };
-  ethereum: { usd: number };
-  tether: { usd: number };
+  bitcoin: { usd: number }
+  ethereum: { usd: number }
+  tether: { usd: number }
 }
 
 export const fetchCryptoPrices = async (): Promise<CryptoPrices> => {
@@ -12,6 +12,6 @@ export const fetchCryptoPrices = async (): Promise<CryptoPrices> => {
       ids: 'bitcoin,ethereum,tether',
       vs_currencies: 'usd',
     },
-  });
-  return response.data;
-};
+  })
+  return response.data
+}

@@ -1,21 +1,23 @@
-import { styled } from '@mui/material/styles';
-import MuiAppBar, { type AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Tooltip from '@mui/material/Tooltip';
-import { useState } from 'react';
-import type { MouseEvent } from 'react';
+import { styled } from '@mui/material/styles'
+import MuiAppBar, {
+  type AppBarProps as MuiAppBarProps,
+} from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import Box from '@mui/material/Box'
+import Avatar from '@mui/material/Avatar'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import Tooltip from '@mui/material/Tooltip'
+import { useState } from 'react'
+import type { MouseEvent } from 'react'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+  open?: boolean
 }
 
 const StyledAppBar = styled(MuiAppBar, {
@@ -34,27 +36,33 @@ const StyledAppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
+}))
 
 interface TopBarProps {
-  open: boolean;
-  onDrawerOpen: () => void;
+  open: boolean
+  onDrawerOpen: () => void
 }
 
 export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    setAnchorElUser(event.currentTarget)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    setAnchorElUser(null)
+  }
 
   return (
-    <StyledAppBar position="fixed" open={open} color="default" elevation={0} sx={{ borderBottom: '1px solid', borderColor: 'divider' }}>
-      <Toolbar sx={{ justifyContent: open ? 'flex-end' : 'space-between' }} >
+    <StyledAppBar
+      position="fixed"
+      open={open}
+      color="default"
+      elevation={0}
+      sx={{ borderBottom: '1px solid', borderColor: 'divider' }}
+    >
+      <Toolbar sx={{ justifyContent: open ? 'flex-end' : 'space-between' }}>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -69,11 +77,14 @@ export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
         >
           <MenuIcon />
         </IconButton>
-        
+
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="User Placeholder" src="/static/images/avatar/2.jpg" />
+              <Avatar
+                alt="User Placeholder"
+                src="/static/images/avatar/2.jpg"
+              />
             </IconButton>
           </Tooltip>
           <Menu
@@ -102,5 +113,5 @@ export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
         </Box>
       </Toolbar>
     </StyledAppBar>
-  );
+  )
 }

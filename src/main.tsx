@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import '@fontsource-variable/instrument-sans';
+import '@fontsource-variable/instrument-sans'
 import './index.css'
 import App from './App.tsx'
 
@@ -28,8 +28,8 @@ const theme = createTheme({
         root: {
           borderRadius: 10,
           boxShadow: 'none',
-        }
-      }
+        },
+      },
     },
   },
 })
