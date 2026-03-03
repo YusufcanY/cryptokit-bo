@@ -470,10 +470,10 @@
     "@eslint/core" "^0.17.0"
     levn "^0.4.1"
 
-"@fontsource/roboto@^5.2.10":
-  version "5.2.10"
-  resolved "https://registry.npmjs.org/@fontsource/roboto/-/roboto-5.2.10.tgz"
-  integrity sha512-8HlA5FtSfz//oFSr2eL7GFXAiE7eIkcGOtx7tjsLKq+as702x9+GU7K95iDeWFapHC4M2hv9RrpXKRTGGBI8Zg==
+"@fontsource-variable/instrument-sans@^5.2.8":
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/instrument-sans/-/instrument-sans-5.2.8.tgz#357753c4cb92380130bff79e58ac9b89e6a97bbb"
+  integrity sha512-mTCaukbdIjjoipj2E3Q5XoZM3ZxJWdzyHevf/LG/0PHlfF9Q85pxOM7B7A9MerFyxmRzz5kVlumgIvgDSG4CPg==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"

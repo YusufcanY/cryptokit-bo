@@ -53,8 +53,8 @@ export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
   };
 
   return (
-    <StyledAppBar position="fixed" open={open} color="primary" elevation={0} sx={{ borderBottom: '1px solid', borderColor: 'divider' }}>
-      <Toolbar sx={{ justifyContent: open ? 'flex-end' : 'space-between' }}>
+    <StyledAppBar position="fixed" open={open} color="default" elevation={0} sx={{ borderBottom: '1px solid', borderColor: 'divider' }}>
+      <Toolbar sx={{ justifyContent: open ? 'flex-end' : 'space-between' }} >
         <IconButton
           color="inherit"
           aria-label="open drawer"
