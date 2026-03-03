@@ -12,7 +12,7 @@ export function MarketPrices() {
 
   return (
     <>
-      <Typography variant="h4" component="h1" fontWeight="700" gutterBottom>
+      <Typography variant="h4" component="h1" fontWeight="700">
         Market Overview
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>

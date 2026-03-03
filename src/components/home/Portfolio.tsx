@@ -60,7 +60,7 @@ export function Portfolio() {
 
   return (
     <Box sx={{ mt: 6, mb: 0 }}>
-      <Typography variant="h4" component="h2" fontWeight="700" gutterBottom>
+      <Typography variant="h4" component="h2" fontWeight="700">
         Portfolio
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
