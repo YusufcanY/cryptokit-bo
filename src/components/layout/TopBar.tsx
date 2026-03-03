@@ -8,13 +8,17 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
+import RefreshIcon from '@mui/icons-material/Refresh'
 import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Tooltip from '@mui/material/Tooltip'
+import Backdrop from '@mui/material/Backdrop'
+import CircularProgress from '@mui/material/CircularProgress'
 import { useState } from 'react'
 import type { MouseEvent } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
 const drawerWidth = 240
 
@@ -47,6 +51,8 @@ interface TopBarProps {
 
 export default function TopBar({ open, onDrawerToggle }: TopBarProps) {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const queryClient = useQueryClient()
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -56,65 +62,94 @@ export default function TopBar({ open, onDrawerToggle }: TopBarProps) {
     setAnchorElUser(null)
   }
 
-  return (
-    <StyledAppBar
-      position="fixed"
-      open={open}
-      color="default"
-      elevation={0}
-      sx={{ borderBottom: '1px solid', borderColor: 'divider' }}
-    >
-      <Toolbar sx={{ justifyContent: open ? 'flex-end' : 'space-between' }}>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={onDrawerToggle}
-          edge="start"
-          sx={[
-            {
-              marginRight: 5,
-            },
-            open && { display: 'none' },
-          ]}
-        >
-          <MenuIcon />
-        </IconButton>
+  const handleRefresh = () => {
+    setIsRefreshing(true)
+    queryClient.invalidateQueries()
+    setTimeout(() => {
+      setIsRefreshing(false)
+    }, 1000)
+  }
 
-        <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar
-                alt="User"
-              />
-            </IconButton>
-          </Tooltip>
-          <Menu
-            sx={{ mt: '45px' }}
-            id="menu-appbar"
-            anchorEl={anchorElUser}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElUser)}
-            onClose={handleCloseUserMenu}
+  return (
+    <>
+      <StyledAppBar
+        position="fixed"
+        open={open}
+        color="default"
+        elevation={0}
+        sx={{ borderBottom: '1px solid', borderColor: 'divider' }}
+      >
+        <Toolbar sx={{ justifyContent: open ? 'flex-end' : 'space-between' }}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={onDrawerToggle}
+            edge="start"
+            sx={[
+              {
+                marginRight: 5,
+              },
+              open && { display: 'none' },
+            ]}
           >
-            <MenuItem onClick={handleCloseUserMenu}>
-              <PersonIcon sx={{ mr: 1, color: 'text.primary' }} />
-              <Typography textAlign="center">Profile</Typography>
-            </MenuItem>
-            <MenuItem onClick={handleCloseUserMenu} sx={{ color: 'error.main' }}>
-              <LogoutIcon sx={{ mr: 1 }} />
-              <Typography textAlign="center">Logout</Typography>
-            </MenuItem>
-          </Menu>
-        </Box>
-      </Toolbar>
-    </StyledAppBar>
+            <MenuIcon />
+          </IconButton>
+
+          <Box
+            sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', gap: 2 }}
+          >
+            <Tooltip title="Refresh Data">
+              <IconButton
+                onClick={handleRefresh}
+                color="inherit"
+                disabled={isRefreshing}
+              >
+                <RefreshIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="User" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={handleCloseUserMenu}>
+                <PersonIcon sx={{ mr: 1, color: 'text.primary' }} />
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={handleCloseUserMenu}
+                sx={{ color: 'error.main' }}
+              >
+                <LogoutIcon sx={{ mr: 1 }} />
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+        </Toolbar>
+      </StyledAppBar>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 999 }}
+        open={isRefreshing}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </>
   )
 }
