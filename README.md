@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# Back-Office Dashboard Assessment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Single-page React.js application with crypto prices, portfolio and transaction history. Just as requested.
 
-Currently, two official plugins are available:
+## How to Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Install dependencies
+npm install
+yarn install
 
-## React Compiler
+# Run the app
+npm run dev
+yarn dev
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Run the json-server (optional)
+npm run server
+yarn server
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React.js
+- TypeScript
+- Vite
+- Material UI
+  - X Charts
+  - DataGrid Table
+  - Material Icons
+- TanStack Query
+- Axios
+- Prettier and Eslint
+- Json Server
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Why I Used What I Used
+
+- **TanStack Query:** I used TanStack Query for data fetching and state management. It provides caching, background updates, and other features that make it a great choice for data fetching. I used `invalidateQueries` method for **reload button** which is more readable and easier way to refetch all data. Also I find **error handling and loading states** more manageable with TanStack Query.
+
+- **Axios:** This kind of app usually doesn't need Axios. You can use the native Fetch API. But I used Axios because I wanted to **future-proof the app**. The same goes for TanStack Query. In a large scale app, Axios provides more features like request/response interceptors and request cancellation. You should need interceptors if you have to add auth to the app.
+
+- **Json Server:** I used Json Server for **mock data**. It provides a simple way to create a REST API for your application. You can use it for development and testing purposes. In a production environment, you would use a real backend server. I also added a fallback json to Json Server for the production. On [Netlify deploy](https://crypto-admin-task.netlify.app/), **it is going to use the fallback json.**
+
+- **Prettier and Eslint:** I used Prettier and Eslint for **code formatting and linting**. They also help future-proofing the app by maintaining code quality and consistency. In a real life large projects, it will be harder to maintain code quality with bigger teams. If you want to go further you can add [Husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged) to your project.
+
+## Estimated Time
+
+I estimate that this project took me **~8 hours** to complete. Here is the breakdown:
+
+- **Project Setup & Choosing Tech Stack:** 1 hour
+- **UI Design & Responsiveness:** 3 hours
+- **Data Fetching:** 2 hours
+- **Finding Bugs & Fixing Them:** 1 hour
+- **Polishing:** 1 hour
