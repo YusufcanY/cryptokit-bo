@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchCryptoPrices, type CryptoPrices } from '@/services/api/crypto';
+import { useQuery } from '@tanstack/react-query'
+import { fetchCryptoPrices, type CryptoPrices } from '@/services/api/crypto'
 
 export const useCryptoPrices = () => {
   return useQuery<CryptoPrices, Error>({
@@ -7,6 +7,5 @@ export const useCryptoPrices = () => {
     queryFn: fetchCryptoPrices,
     refetchInterval: 60000,
     retry: false,
-    staleTime: 10000,
-  });
-};
+  })
+}
