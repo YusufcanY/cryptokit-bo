@@ -67,6 +67,7 @@ export function TransactionsList() {
       field: 'id',
       headerName: 'ID',
       flex: 1,
+      minWidth: 150,
       renderCell: (params) => {
         const isCopied = copiedId === params.value
         return (
@@ -100,6 +101,7 @@ export function TransactionsList() {
       field: 'player',
       headerName: 'Player',
       flex: 1,
+      minWidth: 120,
       renderCell: (params) => (
         <Box
           sx={{ display: 'flex', alignItems: 'center', height: '100%', gap: 1 }}
@@ -120,6 +122,7 @@ export function TransactionsList() {
       field: 'type',
       headerName: 'Type',
       flex: 1,
+      minWidth: 100,
       renderCell: (params) => {
         const isDeposit = params.value === 'Deposit'
         return (
@@ -139,6 +142,7 @@ export function TransactionsList() {
       field: 'asset',
       headerName: 'Asset',
       flex: 1,
+      minWidth: 120,
       renderCell: (params) => {
         const assetStr = String(params.value).toLowerCase()
         let Icon = AttachMoneyIcon
@@ -183,6 +187,7 @@ export function TransactionsList() {
       field: 'amount',
       headerName: 'Amount',
       flex: 1,
+      minWidth: 120,
       renderCell: (params) => {
         return (
           <Typography
@@ -203,6 +208,7 @@ export function TransactionsList() {
       field: 'usdValue',
       headerName: 'USD Value',
       flex: 1,
+      minWidth: 130,
       renderCell: (params) => {
         return (
           <Typography
