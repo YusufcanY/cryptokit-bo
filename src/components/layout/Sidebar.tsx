@@ -97,6 +97,19 @@ export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
                 {
                   minHeight: 48,
                   px: 2.5,
+                  '&.Mui-selected': {
+                    backgroundColor: 'primary.main',
+                    color: 'black',
+                    '& .MuiListItemIcon-root': {
+                      color: 'black',
+                    },
+                    '& .MuiListItemText-primary': {
+                      fontWeight: 700,
+                    },
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: 'primary.main',
+                  },
                 },
                 open
                   ? {
