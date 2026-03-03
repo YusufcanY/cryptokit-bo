@@ -8,6 +8,10 @@ import {
   Chip,
   IconButton,
   Tooltip,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material'
 import { DataGrid, type GridColDef } from '@mui/x-data-grid'
 import { useTransactions } from '@/hooks/useTransactions'
@@ -28,12 +32,24 @@ export function TransactionsList() {
   const isLoading = isTxLoading || isPricesLoading
 
   const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [typeFilter, setTypeFilter] = useState<string>('all')
+  const [assetFilter, setAssetFilter] = useState<string>('all')
 
   const handleCopy = (id: string) => {
     navigator.clipboard.writeText(id)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
   }
+
+  const uniqueTypes = useMemo(() => {
+    if (!transactions) return []
+    return Array.from(new Set(transactions.map(tx => tx.type)))
+  }, [transactions])
+
+  const uniqueAssets = useMemo(() => {
+    if (!transactions) return []
+    return Array.from(new Set(transactions.map(tx => tx.asset.toLowerCase())))
+  }, [transactions])
 
   const columns: GridColDef[] = [
     { 
@@ -146,7 +162,17 @@ export function TransactionsList() {
   ]
 
   const rows = useMemo(() => {
-    return transactions?.map((tx) => {
+    let filtered = transactions || []
+    
+    if (typeFilter !== 'all') {
+      filtered = filtered.filter(tx => tx.type === typeFilter)
+    }
+    
+    if (assetFilter !== 'all') {
+      filtered = filtered.filter(tx => tx.asset.toLowerCase() === assetFilter.toLowerCase())
+    }
+
+    return filtered.map((tx) => {
       let usdValue = 0
       if (prices && (prices as Record<string, any>)[tx.asset]) {
         usdValue = tx.amount * (prices as Record<string, any>)[tx.asset].usd
@@ -155,8 +181,8 @@ export function TransactionsList() {
         ...tx,
         usdValue,
       }
-    }) || []
-  }, [transactions, prices])
+    })
+  }, [transactions, prices, typeFilter, assetFilter])
 
   return (
     <Card
@@ -167,9 +193,66 @@ export function TransactionsList() {
       }}
     >
       <CardContent sx={{ p: { xs: 2, md: 3 } }}>
-        <Typography variant="h5" component="h2" fontWeight="700" gutterBottom>
-          Recent Transactions
-        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, flexWrap: 'wrap', gap: 2 }}>
+          <Typography variant="h5" component="h2" fontWeight="700">
+            Recent Transactions
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <FormControl 
+              size="small" 
+              sx={{ 
+                minWidth: 120,
+                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'black',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: 'black',
+                }
+              }}
+            >
+              <InputLabel id="type-filter-label">Type</InputLabel>
+              <Select
+                labelId="type-filter-label"
+                value={typeFilter}
+                label="Type"
+                onChange={(e) => setTypeFilter(e.target.value)}
+              >
+                <MenuItem value="all">All</MenuItem>
+                {uniqueTypes.map(type => (
+                  <MenuItem key={type} value={type}>{type}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl 
+              size="small" 
+              sx={{ 
+                minWidth: 120,
+                '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'black',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: 'black',
+                }
+              }}
+            >
+              <InputLabel id="asset-filter-label">Asset</InputLabel>
+              <Select
+                labelId="asset-filter-label"
+                value={assetFilter}
+                label="Asset"
+                onChange={(e) => setAssetFilter(e.target.value)}
+                sx={{textTransform: 'capitalize'}}
+              >
+                <MenuItem value="all">All</MenuItem>
+                {uniqueAssets.map(asset => (
+                  <MenuItem key={asset} value={asset} sx={{ textTransform: 'capitalize' }}>
+                    {asset}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
 
         {isTxError && (
           <Alert severity="error" sx={{ mb: 2 }}>
