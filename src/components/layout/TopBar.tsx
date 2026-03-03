@@ -16,9 +16,12 @@ import MenuItem from '@mui/material/MenuItem'
 import Tooltip from '@mui/material/Tooltip'
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
 import { useState } from 'react'
 import type { MouseEvent } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
+import { useThemeContext } from '@/theme/ThemeContextProvider'
 
 const drawerWidth = 240
 
@@ -53,6 +56,7 @@ export default function TopBar({ open, onDrawerToggle }: TopBarProps) {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const queryClient = useQueryClient()
+  const { mode, toggleColorMode } = useThemeContext()
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget)
@@ -105,6 +109,13 @@ export default function TopBar({ open, onDrawerToggle }: TopBarProps) {
                 disabled={isRefreshing}
               >
                 <RefreshIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip
+              title={`Switch to ${mode === 'light' ? 'dark' : 'light'} mode`}
+            >
+              <IconButton onClick={toggleColorMode} color="inherit">
+                {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
               </IconButton>
             </Tooltip>
 

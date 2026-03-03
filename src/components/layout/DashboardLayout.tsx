@@ -52,7 +52,7 @@ export default function DashboardLayout() {
         sx={{
           flexGrow: 1,
           p: { xs: 2, sm: 3 },
-          bgcolor: '#f8fafc',
+          bgcolor: 'background.default',
           minHeight: '100vh',
           minWidth: 0,
           width: isMobile ? '100%' : `calc(100% - ${open ? 240 : 65}px)`,
