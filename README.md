@@ -51,3 +51,11 @@ I estimate that this project took me **~8 hours** to complete. Here is the break
 - **Data Fetching:** 2 hours
 - **Finding Bugs & Fixing Them:** 1 hour
 - **Polishing:** 1 hour
+
+## Notes
+
+- I didn't configure SEO for the app because it is a backoffice application.
+- I added `.env` file for environment changes. For current state, you don't need to change anything.
+- I didn't add authentication to the app but I would add a state management library like Redux Toolkit or Zustand and would configure Axios interceptors for authentication in a real life project.
+- I didn't add any tests to the app because it is not required for this task. But in a real life project, I would add tests for the app.
+- I didn't add form validation to the app because the app doesn't have any forms. But in a real life backoffice application, I certainly would add form validation to the app.
