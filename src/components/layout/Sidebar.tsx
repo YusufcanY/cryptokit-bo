@@ -12,6 +12,10 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import HomeIcon from '@mui/icons-material/Home'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
+import PeopleIcon from '@mui/icons-material/People'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
+import SettingsIcon from '@mui/icons-material/Settings'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const drawerWidth = 240
@@ -79,7 +83,17 @@ export default function Sidebar({
   const navigate = useNavigate()
   const location = useLocation()
 
-  const menuItems = [{ text: 'Home', icon: <HomeIcon />, path: '/' }]
+  const menuItems = [
+    { text: 'Overview', icon: <HomeIcon />, path: '/' },
+    {
+      text: 'Transactions',
+      icon: <CurrencyExchangeIcon />,
+      path: '/transactions',
+    },
+    { text: 'Users', icon: <PeopleIcon />, path: '/users' },
+    { text: 'Analytics', icon: <AnalyticsIcon />, path: '/analytics' },
+    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  ]
 
   const drawerContent = (
     <>
