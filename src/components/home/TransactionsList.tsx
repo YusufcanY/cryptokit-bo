@@ -24,10 +24,11 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import CheckIcon from '@mui/icons-material/Check'
 import { EthereumIcon } from '@/components/icons/EthereumIcon'
+import ErrorIcon from '@mui/icons-material/Error'
 
 export function TransactionsList() {
   const { data: transactions, isLoading: isTxLoading, isError: isTxError, error: txError } = useTransactions()
-  const { data: prices, isLoading: isPricesLoading } = useCryptoPrices()
+  const { data: prices, isLoading: isPricesLoading, isError: isPricesError } = useCryptoPrices()
 
   const isLoading = isTxLoading || isPricesLoading
 
@@ -155,6 +156,13 @@ export function TransactionsList() {
         return (
           <Typography variant="body2" sx={{ fontWeight: 500, display: 'flex', alignItems: 'center', height: '100%' }}>
             {formatCurrency(params.row.usdValue)}
+            {isPricesError && (
+              <Tooltip title="Error fetching crypto prices. Please try again later.">
+                <IconButton size="small" sx={{ color: 'error.main' }}>
+                  <ErrorIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            )}
           </Typography>
         )
       },

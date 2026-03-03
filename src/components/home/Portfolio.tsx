@@ -16,7 +16,7 @@ import { useTheme } from '@mui/material/styles'
 export function Portfolio() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const { data: prices, isLoading: isPricesLoading } = useCryptoPrices()
+  const { data: prices, isLoading: isPricesLoading, isError: isPricesError } = useCryptoPrices()
   const {
     data: portfolio,
     isLoading: isPortfolioLoading,
@@ -67,6 +67,11 @@ export function Portfolio() {
         <Alert severity="error" sx={{ mb: 4, borderRadius: 2 }}>
           Error fetching portfolio:{' '}
           {portfolioError?.message || 'Something went wrong'}
+        </Alert>
+      )}
+      {isPricesError && (
+        <Alert severity="error" sx={{ mb: 4, borderRadius: 2 }}>
+          Error fetching crypto prices. Please try again later.
         </Alert>
       )}
 

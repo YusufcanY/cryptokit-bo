@@ -97,7 +97,7 @@ export function MarketPrices() {
 
       {isError && (
         <Alert severity="error" sx={{ mb: 4, borderRadius: 2 }}>
-          Error fetching prices: {error?.message || 'Something went wrong'}
+          Error fetching crypto prices: {error?.message || 'Something went wrong'}
         </Alert>
       )}
 
