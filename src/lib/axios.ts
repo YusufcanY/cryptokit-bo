@@ -29,7 +29,9 @@ api.interceptors.response.use(
       const config = error.config
       const method = config.method?.toLowerCase()
       if (method === 'get') {
-        console.warn('[Mock API Fallback] Server unreachable. Using local db.json')
+        console.warn(
+          '[Mock API Fallback] Server unreachable. Using local db.json',
+        )
         const urlPath = config.url?.replace(/^\//, '').split('?')[0] || ''
         const collectionName = urlPath.split('/')[0]
 

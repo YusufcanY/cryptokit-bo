@@ -16,7 +16,11 @@ import { useTheme } from '@mui/material/styles'
 export function Portfolio() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const { data: prices, isLoading: isPricesLoading, isError: isPricesError } = useCryptoPrices()
+  const {
+    data: prices,
+    isLoading: isPricesLoading,
+    isError: isPricesError,
+  } = useCryptoPrices()
   const {
     data: portfolio,
     isLoading: isPortfolioLoading,
@@ -144,10 +148,10 @@ export function Portfolio() {
                     }}
                     slotProps={{
                       legend: {
-                        direction: (isMobile ? 'horizontal' : 'vertical'),
+                        direction: isMobile ? 'horizontal' : 'vertical',
                         position: {
-                          vertical: (isMobile ? 'bottom' : 'middle'),
-                          horizontal: (isMobile ? 'center' : 'end'),
+                          vertical: isMobile ? 'bottom' : 'middle',
+                          horizontal: isMobile ? 'center' : 'end',
                         },
                       },
                     }}

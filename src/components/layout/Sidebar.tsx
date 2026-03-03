@@ -69,7 +69,12 @@ interface SidebarProps {
   onDrawerClose: () => void
 }
 
-export default function Sidebar({ open, mobileOpen, isMobile, onDrawerClose }: SidebarProps) {
+export default function Sidebar({
+  open,
+  mobileOpen,
+  isMobile,
+  onDrawerClose,
+}: SidebarProps) {
   const theme = useTheme()
   const navigate = useNavigate()
   const location = useLocation()

@@ -9,19 +9,14 @@ import { useTheme } from '@mui/material/styles'
 export default function DashboardLayout() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileOpenState, setMobileOpen] = useState(false)
+
+  const mobileOpen = isMobile && mobileOpenState
 
   const [open, setOpen] = useState(() => {
     const saved = localStorage.getItem('sidebarOpen')
     return saved !== null ? saved === 'true' : true
   })
-
-  // Close mobile drawer when resizing to desktop
-  useEffect(() => {
-    if (!isMobile && mobileOpen) {
-      setMobileOpen(false)
-    }
-  }, [isMobile, mobileOpen])
 
   useEffect(() => {
     localStorage.setItem('sidebarOpen', String(open))
@@ -45,25 +40,22 @@ export default function DashboardLayout() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <TopBar 
-        open={!isMobile && open} 
-        onDrawerToggle={handleDrawerToggle} 
-      />
-      <Sidebar 
-        open={!isMobile && open} 
+      <TopBar open={!isMobile && open} onDrawerToggle={handleDrawerToggle} />
+      <Sidebar
+        open={!isMobile && open}
         mobileOpen={mobileOpen}
         isMobile={isMobile}
-        onDrawerClose={handleDrawerClose} 
+        onDrawerClose={handleDrawerClose}
       />
       <Box
         component="main"
-        sx={{ 
-          flexGrow: 1, 
-          p: { xs: 2, sm: 3 }, 
-          bgcolor: '#f8fafc', 
-          minHeight: '100vh', 
+        sx={{
+          flexGrow: 1,
+          p: { xs: 2, sm: 3 },
+          bgcolor: '#f8fafc',
+          minHeight: '100vh',
           minWidth: 0,
-          width: isMobile ? '100%' : `calc(100% - ${open ? 240 : 65}px)`
+          width: isMobile ? '100%' : `calc(100% - ${open ? 240 : 65}px)`,
         }}
       >
         <DrawerHeader />
