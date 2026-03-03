@@ -3,32 +3,68 @@ import { Outlet } from 'react-router-dom'
 import TopBar from './TopBar'
 import Sidebar, { DrawerHeader } from './Sidebar'
 import { useState, useEffect } from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
 export default function DashboardLayout() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const [mobileOpen, setMobileOpen] = useState(false)
+
   const [open, setOpen] = useState(() => {
     const saved = localStorage.getItem('sidebarOpen')
     return saved !== null ? saved === 'true' : true
   })
 
+  // Close mobile drawer when resizing to desktop
+  useEffect(() => {
+    if (!isMobile && mobileOpen) {
+      setMobileOpen(false)
+    }
+  }, [isMobile, mobileOpen])
+
   useEffect(() => {
     localStorage.setItem('sidebarOpen', String(open))
   }, [open])
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
+  const handleDrawerToggle = () => {
+    if (isMobile) {
+      setMobileOpen(!mobileOpen)
+    } else {
+      setOpen(!open)
+    }
   }
 
   const handleDrawerClose = () => {
-    setOpen(false)
+    if (isMobile) {
+      setMobileOpen(false)
+    } else {
+      setOpen(false)
+    }
   }
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <TopBar open={open} onDrawerOpen={handleDrawerOpen} />
-      <Sidebar open={open} onDrawerClose={handleDrawerClose} />
+      <TopBar 
+        open={!isMobile && open} 
+        onDrawerToggle={handleDrawerToggle} 
+      />
+      <Sidebar 
+        open={!isMobile && open} 
+        mobileOpen={mobileOpen}
+        isMobile={isMobile}
+        onDrawerClose={handleDrawerClose} 
+      />
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, bgcolor: '#f8fafc', minHeight: '100vh', minWidth: 0 }}
+        sx={{ 
+          flexGrow: 1, 
+          p: { xs: 2, sm: 3 }, 
+          bgcolor: '#f8fafc', 
+          minHeight: '100vh', 
+          minWidth: 0,
+          width: isMobile ? '100%' : `calc(100% - ${open ? 240 : 65}px)`
+        }}
       >
         <DrawerHeader />
         <Outlet />

@@ -10,8 +10,12 @@ import { useCryptoPrices } from '@/hooks/useCryptoPrices'
 import { usePortfolio } from '@/hooks/usePortfolio'
 import { PieChart } from '@mui/x-charts/PieChart'
 import { formatCurrency } from '@/utils/format'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
 export function Portfolio() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const { data: prices, isLoading: isPricesLoading } = useCryptoPrices()
   const {
     data: portfolio,
@@ -103,6 +107,7 @@ export function Portfolio() {
                   component="div"
                   fontWeight="700"
                   color="text.primary"
+                  sx={{ fontSize: { xs: '2rem', md: '3rem' } }}
                 >
                   {formatCurrency(totalPortfolioValue)}
                 </Typography>
@@ -122,13 +127,25 @@ export function Portfolio() {
                           additionalRadius: -30,
                           color: 'gray',
                         },
-                        innerRadius: 60,
+                        innerRadius: isMobile ? 40 : 60,
                         paddingAngle: 2,
                         cornerRadius: 4,
                       },
                     ]}
-                    height={300}
-                    margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                    height={isMobile ? 350 : 300}
+                    margin={{
+                      left: isMobile ? 20 : 0,
+                      right: isMobile ? 20 : 0,
+                    }}
+                    slotProps={{
+                      legend: {
+                        direction: (isMobile ? 'horizontal' : 'vertical'),
+                        position: {
+                          vertical: (isMobile ? 'bottom' : 'middle'),
+                          horizontal: (isMobile ? 'center' : 'end'),
+                        },
+                      },
+                    }}
                   />
                 ) : (
                   <Box

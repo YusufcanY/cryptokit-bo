@@ -42,10 +42,10 @@ const StyledAppBar = styled(MuiAppBar, {
 
 interface TopBarProps {
   open: boolean
-  onDrawerOpen: () => void
+  onDrawerToggle: () => void
 }
 
-export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
+export default function TopBar({ open, onDrawerToggle }: TopBarProps) {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -68,7 +68,7 @@ export default function TopBar({ open, onDrawerOpen }: TopBarProps) {
         <IconButton
           color="inherit"
           aria-label="open drawer"
-          onClick={onDrawerOpen}
+          onClick={onDrawerToggle}
           edge="start"
           sx={[
             {

@@ -64,18 +64,20 @@ const StyledDrawer = styled(MuiDrawer, {
 
 interface SidebarProps {
   open: boolean
+  mobileOpen?: boolean
+  isMobile?: boolean
   onDrawerClose: () => void
 }
 
-export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
+export default function Sidebar({ open, mobileOpen, isMobile, onDrawerClose }: SidebarProps) {
   const theme = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
 
   const menuItems = [{ text: 'Home', icon: <HomeIcon />, path: '/' }]
 
-  return (
-    <StyledDrawer variant="permanent" open={open}>
+  const drawerContent = (
+    <>
       <DrawerHeader sx={{ justifyContent: 'space-between' }}>
         <Typography
           variant="h6"
@@ -98,7 +100,12 @@ export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                navigate(item.path)
+                if (isMobile) {
+                  onDrawerClose()
+                }
+              }}
               selected={location.pathname === item.path}
               sx={[
                 {
@@ -118,7 +125,7 @@ export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
                     backgroundColor: 'primary.main',
                   },
                 },
-                open
+                open || (isMobile && mobileOpen)
                   ? {
                       justifyContent: 'initial',
                     }
@@ -133,7 +140,7 @@ export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
                     minWidth: 0,
                     justifyContent: 'center',
                   },
-                  open
+                  open || (isMobile && mobileOpen)
                     ? {
                         mr: 3,
                       }
@@ -147,7 +154,7 @@ export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
               <ListItemText
                 primary={item.text}
                 sx={[
-                  open
+                  open || (isMobile && mobileOpen)
                     ? {
                         opacity: 1,
                       }
@@ -160,6 +167,27 @@ export default function Sidebar({ open, onDrawerClose }: SidebarProps) {
           </ListItem>
         ))}
       </List>
+    </>
+  )
+
+  return isMobile ? (
+    <MuiDrawer
+      variant="temporary"
+      open={mobileOpen}
+      onClose={onDrawerClose}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
+      sx={{
+        display: { xs: 'block', md: 'none' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+      }}
+    >
+      {drawerContent}
+    </MuiDrawer>
+  ) : (
+    <StyledDrawer variant="permanent" open={open}>
+      {drawerContent}
     </StyledDrawer>
   )
 }

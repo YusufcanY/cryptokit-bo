@@ -5,7 +5,7 @@ import { TransactionsList } from '@/components/home/TransactionsList'
 
 export default function Home() {
   return (
-    <Box sx={{ p: { xs: 2, md: 4 }, pt: '0!important' }}>
+    <Box sx={{ p: { xs: 0, md: 2 }, pt: '0!important' }}>
       <Box sx={{ my: 0 }}>
         <MarketPrices />
         <Portfolio />

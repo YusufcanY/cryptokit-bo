@@ -77,6 +77,7 @@ export function MarketPrices() {
             component="div"
             fontWeight="700"
             color="text.primary"
+            sx={{ fontSize: { xs: '1.5rem', md: '3rem' } }}
           >
             {price !== undefined ? formatCurrency(price) : '---'}
           </Typography>
@@ -104,7 +105,7 @@ export function MarketPrices() {
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
-          gap: 4,
+          gap: { xs: 2, md: 4 },
         }}
       >
         <Box sx={{ flex: 1 }}>
