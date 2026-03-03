@@ -28,7 +28,7 @@ export default function DashboardLayout() {
       <Sidebar open={open} onDrawerClose={handleDrawerClose} />
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, bgcolor: '#f8fafc', minHeight: '100vh' }}
+        sx={{ flexGrow: 1, p: 3, bgcolor: '#f8fafc', minHeight: '100vh', minWidth: 0 }}
       >
         <DrawerHeader />
         <Outlet />
